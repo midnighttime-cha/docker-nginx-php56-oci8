@@ -47,5 +47,5 @@ COPY ./default /etc/nginx/sites-available/default
 # Expose port 80 for Nginx
 EXPOSE 80
 
-# Start both Nginx and PHP-FPM services
-CMD service nginx start && php-fpm
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
