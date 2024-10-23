@@ -27,8 +27,8 @@ RUN apt-get install -y \
 # Download and install Oracle Instant Client
 RUN mkdir -p /opt/oracle
 
-COPY ./docker-assets/oracle-client/instantclient-basic-linux.x64-12.2.0.1.0.zip /opt/oracle
-COPY ./docker-assets/oracle-client/instantclient-sdk-linux.x64-12.2.0.1.0.zip /opt/oracle
+COPY ./client/instantclient-basic-linux.x64-12.2.0.1.0.zip /opt/oracle
+COPY ./client/instantclient-sdk-linux.x64-12.2.0.1.0.zip /opt/oracle
 
 RUN cd /opt/oracle \
     && unzip instantclient-basic-linux.x64-12.2.0.1.0.zip \
