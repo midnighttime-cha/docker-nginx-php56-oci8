@@ -48,8 +48,5 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 # Expose port 80 for Nginx
 EXPOSE 80
 
-# Copy the Supervisor configuration to manage both Nginx and PHP-FPM
-COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Start Supervisor which manages Nginx and PHP-FPM
-CMD ["/usr/bin/supervisord"]
+# Start Nginx
+CMD ["sh", "-c", "php-fpm & nginx -g 'daemon off;'"]
