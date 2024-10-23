@@ -1,6 +1,14 @@
 # Use an official PHP 5.6 image with FPM (FastCGI Process Manager)
 FROM php:5.6-fpm
 
+# Disable APT security check for EOL release
+RUN echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until
+
+# Update the sources list to use archived repositories
+RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list && \
+    sed -i 's/security.debian.org/archive.debian.org/g' /etc/apt/sources.list && \
+    sed -i '/stretch-updates/d' /etc/apt/sources.list
+
 # Install dependencies for Nginx, PHP extensions, and OCI8
 RUN apt-get update && apt-get install -y \
     nginx \
