@@ -43,10 +43,13 @@ RUN docker-php-ext-configure oci8 --with-oci8=instantclient,/opt/oracle/instantc
     && docker-php-ext-install oci8
 
 # Copy custom Nginx configuration
-COPY ./default /etc/nginx/sites-available/default
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80 for Nginx
 EXPOSE 80
 
-# Start Nginx
-CMD ["sh", "-c", "php-fpm & nginx -g 'daemon off;'"]
+# Copy the Supervisor configuration to manage both Nginx and PHP-FPM
+COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Start Supervisor which manages Nginx and PHP-FPM
+CMD ["/usr/bin/supervisord"]
