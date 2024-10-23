@@ -21,6 +21,7 @@ RUN apt-get install -y \
     libaio-dev \
     libssl-dev \
     curl \
+    nginx \
     && apt-get clean
 
 
@@ -48,4 +49,4 @@ COPY ./default /etc/nginx/sites-available/default
 EXPOSE 80
 
 # Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["sh", "-c", "php-fpm & nginx -g 'daemon off;'"]
